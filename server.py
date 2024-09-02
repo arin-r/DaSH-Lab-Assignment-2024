@@ -37,11 +37,9 @@ def handle_client(client_socket, client_id):
                 try:
                     client[0].send(response_json.encode('utf-8'))
                 except:
-                    # Remove client if it fails to send (client disconnected)
                     clients.remove(client)
     
     finally:
-        # Remove the client when done
         clients.remove((client_socket, client_id))
         client_socket.close()
 
