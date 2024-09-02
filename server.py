@@ -13,20 +13,16 @@ clients = []
 def handle_client(client_socket, client_id):
     global clients
     try:
-        # Add the new client to the list
         clients.append((client_socket, client_id))
         
         while True:
-            # Receive prompt from the client
             prompt = client_socket.recv(1024).decode('utf-8')
             if not prompt:
                 break
             
-            # Generate response using LLM
             print(f"processing reqeust from client: {client_id}")
             message, time_sent, time_received = get_response(prompt)
             
-            # Create response JSON
             response_json = json.dumps({
                 "Prompt": prompt,
                 "Message": message,
